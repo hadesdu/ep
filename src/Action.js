@@ -10,6 +10,7 @@ define(function(require) {
         Observable.apply(this, arguments);
 
         this._options = opt || {};
+        this._url = this._options.url || '',
         this._views = this._options.views || [];
         this._tplParamName = this._options.tplParamName || '_tpl';
         this._dataType = this._options.dataType || 'json';
@@ -49,14 +50,18 @@ define(function(require) {
     };
 
     Action.prototype.reload = function() {
-        var tplParam = this.getTplParam();
-        var params = this.getParams() || {};
+        var params = util.mix(
+            {}, 
+            this._params,
+            this.getTplParam(),
+            this.getQuery() || {}
+        );
 
         var options = {
             url: this._url,
             method: this._method,
             dataType: this._dataType,
-            data: util.mix(params, tplParam)
+            data: params
         };
 
         _deferred = ajax.request(options);
@@ -96,7 +101,7 @@ define(function(require) {
         console.log('fail');
     };
 
-    Action.prototype.getParams = function() {
+    Action.prototype.getQuery = function() {
     };
 
     return Action;

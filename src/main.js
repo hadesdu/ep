@@ -5,6 +5,7 @@
 define(function(require) {
 
     var controller = require('./controller');
+    var locator = require('./locator');
 
     /**
      * 启动框架
@@ -13,6 +14,7 @@ define(function(require) {
      */
     function start() {
         controller.start();
+        locator.start();
     }
 
     function registerAction() {
@@ -23,10 +25,15 @@ define(function(require) {
         return controller.get.apply(this, arguments);
     }
 
+    function setInitQuery(query) {
+        controller.setInitQuery(query || {});
+    }
+
     return {
         version: '0.1.0',
         start: start,
         get: get,
-        registerAction: registerAction
+        registerAction: registerAction,
+        setInitQuery: setInitQuery
     };
 });
