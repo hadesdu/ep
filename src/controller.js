@@ -10,6 +10,7 @@ define(function(require) {
     var hash = require('./hash');
 
     var _initQuery = {};
+    var _defaultQuery = {};
 
     var _actionConfig = [];
     var _actionMap = {};
@@ -31,7 +32,11 @@ define(function(require) {
     }
 
     function setInitQuery(query) {
-        util.mix(_initQuery, query || {});
+        _initQuery = query || {};
+    }
+
+    function setDefaultQuery(query) {
+        _defaultQuery = query || {};
     }
 
     function initAction() {
@@ -136,6 +141,7 @@ define(function(require) {
         start: start,
         get: get,
         registerAction: registerAction,
-        setInitQuery: setInitQuery
+        setInitQuery: setInitQuery,
+        setDefaultQuery: setDefaultQuery
     };
 });

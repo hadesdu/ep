@@ -29,11 +29,16 @@ define(function(require) {
         controller.setInitQuery(query || {});
     }
 
+    function setDefaultQuery(query) {
+        controller.setDefaultQuery(query || {});
+    }
+
     return {
         version: '0.1.0',
         start: start,
         get: get,
         registerAction: registerAction,
-        setInitQuery: setInitQuery
+        setInitQuery: setInitQuery,
+        setDefaultQuery: setDefaultQuery
     };
 });
